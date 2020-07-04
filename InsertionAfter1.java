@@ -8,7 +8,6 @@ public class InsertionAfter1 {
     l.add(20);
     l.add(25);
     System.out.println(l);
-   
     l.add(3,18);
     System.out.println(l);
     
