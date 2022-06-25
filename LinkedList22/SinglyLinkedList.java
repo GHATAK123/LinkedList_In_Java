@@ -1,4 +1,4 @@
-public class LinkedList1 {
+public class SinglyLinkedList {
 
     public static class Node {
         public int value;
@@ -69,6 +69,75 @@ public class LinkedList1 {
 
         }
 
+        // Find Node via Index
+        public Node get(int index) {
+            Node node = head;
+            for (int i = 0; i < index; i++) {
+                node = node.next;
+            }
+            return node;
+        }
+
+        // Find Node via value
+        public Node find(int value) {
+            Node node = head;
+            while (node != null) {
+                if (node.value == value) {
+                    return node;
+                }
+                node = node.next;
+            }
+            return null;
+        }
+
+        // Delete the node From start
+        public int deleteFromStart() {
+            int val = head.value;
+            head = head.next;
+            if (head == null) {
+                tail = null;
+            }
+            size--;
+            return val;
+
+        }
+
+        // Delete the node From End
+        public int deleteFromEnd() {
+            if (size <= 1) {
+                deleteFromStart();
+            }
+
+            Node secondLast = get(size - 2);
+            int val = tail.value;
+            tail = secondLast;
+            tail.next = null;
+            size--;
+            return val;
+
+        }
+
+        // Delete the Node from particular Index
+        public int deleteFromIndex(int index) {
+            if (index == 0) {
+                deleteFromStart();
+            }
+            if (index == size - 1) {
+                deleteFromEnd();
+            }
+
+            if (index > size) {
+                System.out.println("Index Out Of Bound");
+                return 0;
+            }
+            Node prev = get(index - 1);
+            int val = prev.next.value;
+            prev.next = prev.next.next;
+            size--;
+            return val;
+
+        }
+
         // Display the Node of LinkedList
         public void displayLinkedList() {
             Node temp = head;
@@ -111,6 +180,26 @@ public class LinkedList1 {
         node.sizeLL();
 
         node.insertAtIndex(44, 100);
+
+        node.displayLinkedList();
+        node.sizeLL();
+
+        System.out.println("Deleted Node is " + node.deleteFromStart());
+
+        node.displayLinkedList();
+        node.sizeLL();
+
+        System.out.println("Deleted Node is " + node.deleteFromEnd());
+
+        node.displayLinkedList();
+        node.sizeLL();
+
+        System.out.println("Deleted Node is " + node.deleteFromIndex(100));
+
+        node.displayLinkedList();
+        node.sizeLL();
+
+        System.out.println("Deleted Node is " + node.deleteFromIndex(4));
 
         node.displayLinkedList();
         node.sizeLL();
